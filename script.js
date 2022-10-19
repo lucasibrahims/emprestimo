@@ -507,8 +507,8 @@ var BKAIAbi = [
     "type": "function"
   }
 ];
-var emprestimoEndereco = "0xAF0C7E0AeD2b3F702c4D1d7546E391b745FbF569";
-var BKAIEndereco = "0xCe4bF07f9bBc1BC367F2Cb72c7CD680966015005";
+var emprestimoEndereco = "0xfE347e5a32D81815763dE88Cc5C47F33865EbCdD";
+var BKAIEndereco = "0xe5d2cBc299Ff1Af089528AD408C0a80f0B9aC890";
 let emprestimo = new web3.eth.Contract(emprestimoAbi, emprestimoEndereco);
 let BKAI = new web3.eth.Contract(BKAIAbi, BKAIEndereco);
 var conectarBtn = document.getElementById("conectar"); 
@@ -519,248 +519,249 @@ var pedirEmprestadoBt = document.getElementById("pedir_emprestado");
 var quitarDividaBt = document.getElementById("quitar_divida");
 var retirarInvestimentoBt = document.getElementById("retirar_investimento");
 var mostrarDividaBt = document.getElementById("mostrar_divida");
+var mostrarInvestimentoBt = document.getElementById("mostrar_investimento");
 var saldo = document.getElementById("saldo");
 var sacarEthBt = document.getElementById("sacar_eth");    
 endereco.innerHTML = BKAIEndereco;    
 
 async function conectar(){
-  if(ethereum){
-      try{
-          let accounts = await ethereum.request({method:'eth_requestAccounts'});
-          let account = accounts[0];
-          alert ("Conectado!");
-          console.log(account);
-          return account;
-      } catch(err){
-          alert('Error');
-          console.log(err);
-      }
-  } else{
-      alert('Por favor, instale a carteira');
-  }
+    if(ethereum){
+        try{
+            let accounts = await ethereum.request({method:'eth_requestAccounts'});
+            let account = accounts[0];
+            alert ("Conectado!");
+            console.log(account);
+            return account;
+        } catch(err){
+            alert('Error');
+            console.log(err);
+        }
+    } else{
+        alert('Por favor, instale a carteira');
+    }
 }
 
 async function aprovarTransferencia(_quantidade)
 {
-  if(ethereum) {
-      try {
-          let accounts = await ethereum.request({method:'eth_requestAccounts'});
-          let account = accounts[0];
-          let sendCall = await BKAI.methods.approve(emprestimoEndereco, _quantidade).send({from:account});
-          return sendCall;
-      } catch(err){
-  alert('Error');
-  console.log(err);
-  }
-  } else{
-  alert('Por favor, instale a carteira');
-  }
+    if(ethereum) {
+        try {
+            let accounts = await ethereum.request({method:'eth_requestAccounts'});
+            let account = accounts[0];
+            let sendCall = await BKAI.methods.approve(emprestimoEndereco, _quantidade).send({from:account});
+            return sendCall;
+        } catch(err){
+    alert('Error');
+    console.log(err);
+    }
+    } else{
+    alert('Por favor, instale a carteira');
+    }
 }
 
 async function investir(_quantidade)
 {
-  if(ethereum) {
-      try {
-          let accounts = await ethereum.request({method:'eth_requestAccounts'});
-          let account = accounts[0];
-          let call = await emprestimo.methods.investir(_quantidade).send({from:account});
-          return call;
-      } catch(err){
-  alert('Error');
-  console.log(err);
-  }
-  } else{
-  alert('Por favor, instale a carteira');
-  }
+    if(ethereum) {
+        try {
+            let accounts = await ethereum.request({method:'eth_requestAccounts'});
+            let account = accounts[0];
+            let call = await emprestimo.methods.investir(_quantidade).send({from:account});
+            return call;
+        } catch(err){
+    alert('Error');
+    console.log(err);
+    }
+    } else{
+    alert('Por favor, instale a carteira');
+    }
 }
 
 async function pedirEmprestado(_quantidade)
 {
-  if(ethereum) {
-      try {
-          let accounts = await ethereum.request({method:'eth_requestAccounts'});
-          let account = accounts[0];
-          let bigNumber = _quantidade*10**18;
-          let call = await emprestimo.methods.pegarEmprestado(BigInt(bigNumber)).send({from:account, value: 5*_quantidade*10**14});
-          return call;
-      } catch(err){
-  alert('Error');
-  console.log(err);
-  }
-  } else{
-  alert('Por favor, instale a carteira');
-  }
+    if(ethereum) {
+        try {
+            let accounts = await ethereum.request({method:'eth_requestAccounts'});
+            let account = accounts[0];
+            let bigNumber = _quantidade*10**18;
+            let call = await emprestimo.methods.pegarEmprestado(BigInt(bigNumber)).send({from:account, value: 5*_quantidade*10**14});
+            return call;
+        } catch(err){
+    alert('Error');
+    console.log(err);
+    }
+    } else{
+    alert('Por favor, instale a carteira');
+    }
 }
 
 async function quitarDivida()
 {
-  if(ethereum) {
-      try {
-          let accounts = await ethereum.request({method:'eth_requestAccounts'});
-          let account = accounts[0];
-          let call = await emprestimo.methods.quitarDivida().send({from:account});
-          return call;
-      } catch(err){
-  alert('Error');
-  console.log(err);
-  }
-  } else{
-  alert('Por favor, instale a carteira');
-  }
+    if(ethereum) {
+        try {
+            let accounts = await ethereum.request({method:'eth_requestAccounts'});
+            let account = accounts[0];
+            let call = await emprestimo.methods.quitarDivida().send({from:account});
+            return call;
+        } catch(err){
+    alert('Error');
+    console.log(err);
+    }
+    } else{
+    alert('Por favor, instale a carteira');
+    }
 }
 
 async function retirarInvestimento()
 {
-  if(ethereum) {
-      try {
-          let accounts = await ethereum.request({method:'eth_requestAccounts'});
-          let account = accounts[0];
-          let call = await emprestimo.methods.retirarInvestimento().send({from:account});
-          return call;
-      } catch(err){
-  alert('Error');
-  console.log(err);
-  }
-  } else{
-  alert('Por favor, instale a carteira');
-  }
+    if(ethereum) {
+        try {
+            let accounts = await ethereum.request({method:'eth_requestAccounts'});
+            let account = accounts[0];
+            let call = await emprestimo.methods.retirarInvestimento().send({from:account});
+            return call;
+        } catch(err){
+    alert('Error');
+    console.log(err);
+    }
+    } else{
+    alert('Por favor, instale a carteira');
+    }
 }
 
 async function getDivida(){
-  {
-      if(ethereum) {
-          try {
-              let accounts = await ethereum.request({method:'eth_requestAccounts'});
-              let account = accounts[0];
-              let call = await emprestimo.methods.getDivida().call({from:account});
-              call = call.toString();
-              return call;
-          } catch(err){
-      alert('Error');
-      console.log(err);
-      }
-      } else{
-      alert('Por favor, instale a carteira');
-      }
-  }
+    {
+        if(ethereum) {
+            try {
+                let accounts = await ethereum.request({method:'eth_requestAccounts'});
+                let account = accounts[0];
+                let call = await emprestimo.methods.getDivida().call({from:account});
+                call = call.toString();
+                return call;
+            } catch(err){
+        alert('Error');
+        console.log(err);
+        }
+        } else{
+        alert('Por favor, instale a carteira');
+        }
+    }
 }
 
 async function getInvestimento(){
-  {
-      if(ethereum) {
-          try {
-              let accounts = await ethereum.request({method:'eth_requestAccounts'});
-              let account = accounts[0];
-              let call = await emprestimo.methods.getInvestimento().call({from:account});
-              call = call.toString();
-              return call;
-          } catch(err){
-      alert('Error');
-      console.log(err);
-      }
-      } else{
-      alert('Por favor, instale a carteira');
-      }
-  }
+    {
+        if(ethereum) {
+            try {
+                let accounts = await ethereum.request({method:'eth_requestAccounts'});
+                let account = accounts[0];
+                let call = await emprestimo.methods.getInvestimento().call({from:account});
+                call = call.toString();
+                return call;
+            } catch(err){
+        alert('Error');
+        console.log(err);
+        }
+        } else{
+        alert('Por favor, instale a carteira');
+        }
+    }
 }
 async function sacarEth(){
-  {
-      if(ethereum) {
-          try {
-              let accounts = await ethereum.request({method:'eth_requestAccounts'});
-              let account = accounts[0];
-              let call = await emprestimo.methods.retirarFundos().call({from:account});
-              return call;
-          } catch(err){
-      alert('Error');
-      console.log(err);
-      }
-      } else{
-      alert('Por favor, instale a carteira');
-      }
-  }
+    {
+        if(ethereum) {
+            try {
+                let accounts = await ethereum.request({method:'eth_requestAccounts'});
+                let account = accounts[0];
+                let call = await emprestimo.methods.retirarFundos().call({from:account});
+                return call;
+            } catch(err){
+        alert('Error');
+        console.log(err);
+        }
+        } else{
+        alert('Por favor, instale a carteira');
+        }
+    }
 }
 
 
 conectarBtn.addEventListener('click', ()=>{
-  conectar().then((response)=>{
-      console.log(response)
-  }).catch((err)=>{
-      alert(err);
-      console.log(err);
-  });
+    conectar().then((response)=>{
+        console.log(response)
+    }).catch((err)=>{
+        alert(err);
+        console.log(err);
+    });
 });
 
 mostrarDividaBt.addEventListener('click', ()=>{
 getDivida().then((response)=>{
-  saldo.innerHTML = `Sua dívida é ${response/10**18} BKAI`;
-  }).catch((err)=>{
-      alert(err);
-      console.log(err);
-  });
+    saldo.innerHTML = `Sua dívida é ${response/10**18} BKAI`;
+    }).catch((err)=>{
+        alert(err);
+        console.log(err);
+    });
 });
 
 mostrarInvestimentoBt.addEventListener('click', ()=>{
-  getInvestimento().then((response)=>{
-      saldo.innerHTML = `Seu investimento é ${response/10**18} BKAI`;
-      }).catch((err)=>{
-          alert(err);
-          console.log(err);
-      });
-  });
+    getInvestimento().then((response)=>{
+        saldo.innerHTML = `Seu investimento é ${response/10**18} BKAI`;
+        }).catch((err)=>{
+            alert(err);
+            console.log(err);
+        });
+    });
 
 investirBt.addEventListener('click', async () => {
-  let bigNumber = Number(input.value)*10**18;
-  aprovarTransferencia(BigInt(bigNumber)).then((res1)=>{
-      console.log(res1);
-      investir(BigInt(bigNumber)).then((res)=>{
-          console.log(res);
-      }).catch((err2) => {
-          console.log(err2);
-      });
-  }).catch((err1)=>{
-      console.log(err1);
-  });
+    let bigNumber = Number(input.value)*10**18;
+    aprovarTransferencia(BigInt(bigNumber)).then((res1)=>{
+        console.log(res1);
+        investir(BigInt(bigNumber)).then((res)=>{
+            console.log(res);
+        }).catch((err2) => {
+            console.log(err2);
+        });
+    }).catch((err1)=>{
+        console.log(err1);
+    });
 });
 
 quitarDividaBt.addEventListener('click', async () => {
-      let divida = await getDivida();
-      aprovarTransferencia(divida).then((res1)=>{
-          console.log(res1);
-          quitarDivida().then((res)=>{
-              console.log(res);
-          }).catch((err2) => {
-              console.log(err2);
-          });
-      }).catch((err1)=>{
-          console.log(err1);
-      });
-  });
+        let divida = await getDivida();
+        aprovarTransferencia(divida).then((res1)=>{
+            console.log(res1);
+            quitarDivida().then((res)=>{
+                console.log(res);
+            }).catch((err2) => {
+                console.log(err2);
+            });
+        }).catch((err1)=>{
+            console.log(err1);
+        });
+    });
 
 pedirEmprestadoBt.addEventListener('click', ()=>{
-  pedirEmprestado(Number(input.value)).then((response)=>{
-      console.log(response);
-      }).catch((err)=>{
-          alert(err);
-          console.log(err);
-      });
-  });
+    pedirEmprestado(Number(input.value)).then((response)=>{
+        console.log(response);
+        }).catch((err)=>{
+            alert(err);
+            console.log(err);
+        });
+    });
 
 
 retirarInvestimentoBt.addEventListener('click', ()=>{
-  retirarInvestimento().then((response)=>{
-      console.log(response);
-      }).catch((err)=>{
-          alert(err);
-          console.log(err);
-      });
-  });
+    retirarInvestimento().then((response)=>{
+        console.log(response);
+        }).catch((err)=>{
+            alert(err);
+            console.log(err);
+        });
+    });
 
 sacarEthBt.addEventListener('click', ()=>{
-  sacarEth().then((response)=>{
-      console.log(response);
-      }).catch((err)=>{
-          alert(err);
-          console.log(err);
-      });
-  });
+    sacarEth().then((response)=>{
+        console.log(response);
+        }).catch((err)=>{
+            alert(err);
+            console.log(err);
+        });
+    });
